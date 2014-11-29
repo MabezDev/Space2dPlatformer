@@ -11,6 +11,7 @@ public abstract class BaseState {
 
     public BaseState(GameStateManager gsm){
         this.gsm = gsm;
+        onCreation();
     }
 
     public abstract void onCreation();

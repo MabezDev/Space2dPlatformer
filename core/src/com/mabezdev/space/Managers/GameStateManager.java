@@ -15,10 +15,13 @@ public class GameStateManager {
     private int current;
     private BaseState currentState;
     private OrthographicCamera cam;
+    public static ResourceManager resourceManager;
 
     public GameStateManager(OrthographicCamera cam){
         this.cam = cam;
-       setState(MENU);
+        resourceManager = new ResourceManager();
+        resourceManager.TTFLoader("orangejuice2.ttf",12,"Orange");
+        setState(MENU);
     }
 
     public void setState(int s){

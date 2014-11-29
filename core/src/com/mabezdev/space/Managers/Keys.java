@@ -13,8 +13,8 @@ public class Keys {
     public static int SPACE = 4;
     public static int SHIFT = 5;
     public static int ESCAPE = 6;
-    private static boolean[] keys = new boolean[NUM_KEYS];;
-    private static boolean[] pkeys = new boolean[NUM_KEYS];;
+    private static boolean[] keys = new boolean[NUM_KEYS];
+    private static boolean[] pkeys = new boolean[NUM_KEYS];
 
 
 

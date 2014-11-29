@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.mabezdev.space.Managers.GameStateManager;
+import com.mabezdev.space.Managers.MyKeys;
 
 public class Main extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -30,7 +31,7 @@ public class Main extends ApplicationAdapter {
 
         gsm = new GameStateManager(camera);
 
-
+        Gdx.input.setInputProcessor(new MyKeys());
         /*batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
         font = new FreeTypeFontGenerator(Gdx.files.internal("orangejuice2.ttf"));
@@ -46,5 +47,6 @@ public class Main extends ApplicationAdapter {
 	public void render () {
 		dt = Gdx.graphics.getDeltaTime();
         gsm.update(dt);
+        gsm.draw();
 	}
 }

@@ -28,7 +28,7 @@ public class MyKeys implements InputProcessor {
             Keys.setKeyState(Keys.SHIFT,true);
         }
         if(keycode == Input.Keys.ESCAPE){
-            Keys.setKeyState(Keys.ESC,true);
+            Keys.setKeyState(Keys.ESCAPE,true);
         }
 
 
@@ -57,7 +57,7 @@ public class MyKeys implements InputProcessor {
             Keys.setKeyState(Keys.SHIFT,false);
         }
         if(keycode ==  Input.Keys.ESCAPE){
-            Keys.setKeyState(Keys.ESC,false);
+            Keys.setKeyState(Keys.ESCAPE,false);
         }
 
         return true;

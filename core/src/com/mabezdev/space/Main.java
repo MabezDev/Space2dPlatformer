@@ -28,7 +28,7 @@ public class Main extends ApplicationAdapter {
         camera.viewportHeight = HEIGHT;
         Gdx.app.getGraphics().setTitle("Space Jam");
 
-        gsm = new GameStateManager();
+        gsm = new GameStateManager(camera);
 
 
         /*batch = new SpriteBatch();

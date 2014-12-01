@@ -1,7 +1,6 @@
 package com.mabezdev.space.GameStates;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.mabezdev.space.Entities.Player;
@@ -14,15 +13,18 @@ public class PlayState extends BaseState {
 
     private Player player;
     private TiledMap tileMap;
-    private TiledMapTileSet tiledMapTileSet;
     OrthogonalTiledMapRenderer otmr;
+    private float unitScale = 1/32.0f;
+    private final static int viewWidth = 10;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
+        player = new Player(100,100);
         tileMap = loadMap();
-        gsm.getCam().setToOrtho(true,15*32,15*32);
-        otmr = new OrthogonalTiledMapRenderer(tileMap,1);
-        otmr.setView(gsm.getCam().combined,0,0,gsm.getCam().viewportWidth,gsm.getCam().viewportHeight);
+        gsm.getCam().setToOrtho(false,viewWidth,8);
+        otmr = new OrthogonalTiledMapRenderer(tileMap,unitScale);
+        otmr.setView(gsm.getCam());
+
 
     }
 
@@ -43,6 +45,9 @@ public class PlayState extends BaseState {
 
     @Override
     public void render() {
+        // update the cam position to follow player
+        //gsm.getCam().translate(Player.getX);
+        //might have to do the same for otmr (following)
           otmr.render();
     }
 

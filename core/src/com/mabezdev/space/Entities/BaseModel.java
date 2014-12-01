@@ -5,11 +5,13 @@ package com.mabezdev.space.Entities;
  */
 public abstract class BaseModel {
 
-    private int x;
-    private int y;
-    private int dx;
-    private int dy;
-    private int maxSpeed;
+    public final static int DEFAULT_MOVESPEED = 5;
+
+    protected int x;
+    protected int y;
+    protected int dx;
+    protected int dy;
+    protected int maxSpeed;
 
     public int getX(){ return x; }
     public int getY(){ return y; }

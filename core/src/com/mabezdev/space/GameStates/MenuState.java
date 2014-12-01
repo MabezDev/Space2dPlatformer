@@ -28,8 +28,8 @@ public class MenuState extends BaseState {
 
     @Override
     public void handleInput() {
-            if(Keys.isDown(Keys.SPACE)){
-                System.out.println("isDown");
+            if(Keys.isPressed(Keys.SPACE)){
+                System.out.println("isPressed");
             }
 
     }

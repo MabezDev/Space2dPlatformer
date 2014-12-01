@@ -19,9 +19,10 @@ public class GameStateManager {
 
     public GameStateManager(OrthographicCamera cam){
         this.cam = cam;
+        //initialize resource manager
         resourceManager = new ResourceManager();
         resourceManager.TTFLoader("orangejuice2.ttf",12,"Orange");
-        setState(MENU);
+        setState(PLAY);
     }
 
     public void setState(int s){
@@ -36,12 +37,16 @@ public class GameStateManager {
 
 
     }
+    public OrthographicCamera getCam(){
+        return cam;
+    }
 
     public void update(float dt){
         currentState.update(dt);
-    }
-    public void draw(){
         currentState.handleInput();
+    }
 
+    public void draw(){
+        currentState.render();
     }
 }

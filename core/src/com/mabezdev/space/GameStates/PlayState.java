@@ -1,7 +1,5 @@
 package com.mabezdev.space.GameStates;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -28,7 +26,7 @@ public class PlayState extends BaseState {
 
         gsm.getCam().setToOrtho(false, 15, 15);//set to view wisth later
 
-        player = new Player(gsm.getCam().position.x+1,gsm.getCam().position.y+1);
+        player = new Player(gsm.getCam().viewportWidth/2,gsm.getCam().viewportHeight/2);
         batch = new SpriteBatch();
         tileMap = loadMap();
         otmr = new OrthogonalTiledMapRenderer(tileMap,unitScale,batch);
@@ -51,29 +49,25 @@ public class PlayState extends BaseState {
     @Override
     public void update(float dt) {
         player.update(dt);
-        gsm.getCam().position.x = player.getX();
-        gsm.getCam().position.y = player.getY();
+        gsm.getCam().position.x = player.getX() - gsm.getCam().viewportWidth/2;//not centred on animation not sure if its this or animation in thw wrong p[lace
+        gsm.getCam().position.y = player.getY() - gsm.getCam().viewportHeight/2;
         gsm.getCam().update();
+
     }
 
     @Override
-    public void render() {///follow cam buggy
-        // update the cam position to follow player
-        //gsm.getCam().translate(Player.getX);
-        //might have to do the same for otmr (following)
+    public void render() {
 
-        //it is following player but something is still fucked
-        Gdx.gl.glClearColor(0, 0, 0, 1);//THIS FUKCING FIXED IT IM FUKCING MAD
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix(gsm.getCam().combined);
         gsm.getCam().position.set(player.getX()- gsm.getCam().viewportWidth/2,player.getY() - gsm.getCam().viewportHeight/2,0);
 
         gsm.getCam().update();
         otmr.setView(gsm.getCam());
-
-
-
         otmr.render();
+
+
+
+
 
 
 

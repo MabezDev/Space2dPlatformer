@@ -2,6 +2,7 @@ package com.mabezdev.space;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -46,6 +47,8 @@ public class Main extends ApplicationAdapter {
 
 	@Override
 	public void render () {
+        Gdx.gl.glClearColor(0, 0, 0, 1);//THIS FUKCING FIXED IT IM FUKCING MAD
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		dt = Gdx.graphics.getDeltaTime();
         gsm.update(dt);
         gsm.draw();

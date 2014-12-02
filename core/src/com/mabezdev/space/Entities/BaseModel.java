@@ -7,14 +7,15 @@ public abstract class BaseModel {
 
     public final static int DEFAULT_MOVESPEED = 5;
 
-    protected int x;
-    protected int y;
-    protected int dx;
-    protected int dy;
+    protected float x;
+    protected float y;
+    protected float dx;
+    protected float dy;
     protected int maxSpeed;
 
-    public int getX(){ return x; }
-    public int getY(){ return y; }
+    public float getX(){ return x; }
+    public float getY(){ return y; }
 
+    public abstract void update(float dt);
 
 }

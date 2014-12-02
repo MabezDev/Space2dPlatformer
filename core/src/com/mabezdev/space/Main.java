@@ -27,6 +27,7 @@ public class Main extends ApplicationAdapter {
         camera = new OrthographicCamera();
         camera.viewportWidth = WIDTH;
         camera.viewportHeight = HEIGHT;
+
         Gdx.app.getGraphics().setTitle("Space Jam");
 
         gsm = new GameStateManager(camera);

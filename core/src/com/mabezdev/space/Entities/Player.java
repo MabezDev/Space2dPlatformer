@@ -53,7 +53,7 @@ public class Player extends BaseModel {
             dx = -10;
             setAnimationState(AnimationStates.WAlKING);
         }
-        if(this.isLeft == false && this.isRight == false){
+        if(this.isLeft == false && this.isRight == false ||this.isLeft == true && this.isRight == true){
             dx=0;
             setAnimationState(AnimationStates.IDLE);
         }

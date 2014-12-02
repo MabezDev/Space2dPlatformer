@@ -22,7 +22,7 @@ public class AnimationHandler {
     private float x;
     private float y;
     private int currentAnimation;
-                                           // #8
+    private float stateTime = 0f;                                       // #8
 
     public AnimationHandler(){
             // #11
@@ -41,11 +41,12 @@ public class AnimationHandler {
                 walkFrames[index++] = tmp[i][j];
             }
         }
-        walkAnimation = new Animation(0.025f, walkFrames);
+        walkAnimation = new Animation(0.5f, walkFrames);
     }
 
     public void update(float dt){
-        currentFrame = walkAnimation.getKeyFrame(dt, true);  // #16
+        stateTime += dt;
+        currentFrame = walkAnimation.getKeyFrame(stateTime, true);  // #16
         spriteBatch.begin();
         spriteBatch.draw(currentFrame, x, y);             // #17
         spriteBatch.end();

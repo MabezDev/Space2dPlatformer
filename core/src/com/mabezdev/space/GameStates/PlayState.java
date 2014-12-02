@@ -1,5 +1,6 @@
 package com.mabezdev.space.GameStates;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -22,9 +23,12 @@ public class PlayState extends BaseState {
         super(gsm);
 
         tileMap = loadMap();
-        gsm.getCam().setToOrtho(false,15,15);//set to view wisth later
+        gsm.getCam().setToOrtho(false,viewWidth,8);//set to view wisth later
         player = new Player(gsm.getCam().position.x+1,gsm.getCam().position.y+1);
-        otmr = new OrthogonalTiledMapRenderer(tileMap,unitScale);
+        SpriteBatch batch = new SpriteBatch();
+        batch.setProjectionMatrix(gsm.getCam().combined);
+        otmr = new OrthogonalTiledMapRenderer(tileMap,unitScale,batch);
+        otmr.setView(gsm.getCam());
 
         //gsm.getCam().update();
 
@@ -61,20 +65,19 @@ public class PlayState extends BaseState {
     }
 
     @Override
-    public void handleInput() {
+    public void handleInput() {//movement now working for left and right strafing
             if(Keys.isDown(Keys.D)){
                 player.setRight(true);
                 System.out.print("Right");
-            }
-            if(Keys.isDown(Keys.A)){
+            }else if(Keys.isDown(Keys.A)) {
                 player.setLeft(true);
-            }else{
-                player.setRight(false);
+                System.out.println("LEft");
+            } else if(Keys.isDown(Keys.SPACE)) {
+                player.setJumping(true);
+            } else{
                 player.setLeft(false);
+                player.setRight(false);
                 player.setJumping(false);
-                player.setShooting(false);
-                //neeed to check if falling though
-                player.setIdle(true);
             }
     }
 

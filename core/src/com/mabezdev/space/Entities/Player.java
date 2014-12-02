@@ -1,5 +1,7 @@
 package com.mabezdev.space.Entities;
 
+import com.mabezdev.space.GFX.AnimationHandler;
+
 /**
  * Created by user on 29/11/2014.
  */
@@ -14,36 +16,8 @@ public class Player extends BaseModel {
     private boolean isRight;
     private boolean isLeft;
     private AnimationStates currentState;
-
-    @Override
-    public void update(float dt) {///movement buggy
-            if(this.isRight){
-                dx = 10;
-
-                System.out.println(x);
-            }
-            if(this.isLeft){
-                dx = -10;
-
-                System.out.println(x);
-
-            }
-
-
-
-            x += dx *dt;
-    }
-
-
-
-    public enum AnimationStates{
-        IDLE,
-        WAlKING,
-        JUMP,
-        ROCKET,
-        FALLING,
-        SHOOTING,
-    }
+    AnimationHandler Handler;
+    private static final int jumpHeight = 2;
 
     public Player(float xi, float yi){
         dx = 0;
@@ -57,14 +31,70 @@ public class Player extends BaseModel {
         this.setShooting(false);
         maxSpeed = DEFAULT_MOVESPEED;
         currentState = AnimationStates.IDLE;
+        Handler = new AnimationHandler();
+        Handler.load("tempplayersheet.png");
     }
+
+
+    @Override
+    public void update(float dt) {///movement worki
+        //update animation and move image position to follow body
+        Handler.update(dt);
+        Handler.setPosition(this.x,this.y);
+
+        //handle body movements
+        if(this.isRight == true && this.isLeft==false){
+            setAnimationState(AnimationStates.WAlKING);
+            dx = 10;
+
+
+        }
+        if(this.isLeft == true && this.isRight == false){
+            dx = -10;
+            setAnimationState(AnimationStates.WAlKING);
+        }
+        if(this.isLeft == false && this.isRight == false){
+            dx=0;
+            setAnimationState(AnimationStates.IDLE);
+        }
+        if(this.isJumping ==true){
+            dy = jumpHeight;
+        }
+
+        //actual change of pos
+        x += dx * dt;
+        y += dy * dt;
+            System.out.println(x);
+            System.out.println(y);
+    }
+
+
+
+
+
+
 
     /*
     ANIMATION METHODS
      */
 
-    public void setAnimationState(AnimationStates a){
+    //the states of animation
+    public enum AnimationStates{
+        IDLE,
+        WAlKING,
+        JUMP,
+        ROCKET,
+        FALLING,
+        SHOOTING,
+    }
+
+
+    public void setAnimationState(AnimationStates a){//need to fill switch as we get more animations
         currentState = a;
+        switch (currentState){
+            case WAlKING :
+
+        }
     }
 
 

@@ -11,6 +11,7 @@ import com.mabezdev.space.Managers.Keys;
 /**
  * Created by user on 29/11/2014.
  */
+
 public class PlayState extends BaseState {
 
     private Player player;
@@ -49,9 +50,7 @@ public class PlayState extends BaseState {
     @Override
     public void update(float dt) {
         player.update(dt);
-        gsm.getCam().position.x = player.getX() - gsm.getCam().viewportWidth/2;//not centred on animation not sure if its this or animation in thw wrong p[lace
-        gsm.getCam().position.y = player.getY() - gsm.getCam().viewportHeight/2;
-        gsm.getCam().update();
+
 
     }
 
@@ -59,7 +58,7 @@ public class PlayState extends BaseState {
     public void render() {
 
         batch.setProjectionMatrix(gsm.getCam().combined);
-        gsm.getCam().position.set(player.getX()- gsm.getCam().viewportWidth/2,player.getY() - gsm.getCam().viewportHeight/2,0);
+        gsm.getCam().position.set(player.getX(),player.getY(),0);
 
         gsm.getCam().update();
         otmr.setView(gsm.getCam());
@@ -78,17 +77,17 @@ public class PlayState extends BaseState {
 
     @Override
     public void handleInput() {//movement now working for left and right strafing
-            if(Keys.isDown(Keys.D)){
-                player.setRight(true);
-            }else if(Keys.isDown(Keys.A)) {
-                player.setLeft(true);
-            } else if(Keys.isDown(Keys.SPACE)) {
-                player.setJumping(true);
-            } else{
-                player.setLeft(false);
-                player.setRight(false);
-                player.setJumping(false);
-            }
+        if(Keys.isDown(Keys.D)){
+            player.setRight(true);
+        }else if(Keys.isDown(Keys.A)) {
+            player.setLeft(true);
+        } else if(Keys.isDown(Keys.SPACE)) {
+            player.setJumping(true);
+        } else{
+            player.setLeft(false);
+            player.setRight(false);
+            player.setJumping(false);
+        }
     }
 
     @Override

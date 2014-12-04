@@ -1,5 +1,6 @@
 package com.mabezdev.space.Entities;
 
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mabezdev.space.GFX.AnimationHandler;
 
 /**
@@ -17,7 +18,10 @@ public class Player extends BaseModel {
     private boolean isLeft;
     private AnimationStates currentState;
     AnimationHandler Handler;
-    private static final int jumpHeight = 2;
+    private static final float jumpAcceleration = 5.0f;
+    private static final float jumpFinalAcceleration = 3.0f;
+    ShapeRenderer sr;
+
 
     public Player(float xi, float yi){
         dx = 0;
@@ -29,19 +33,24 @@ public class Player extends BaseModel {
         this.setLeft(false);
         this.setJumping(false);
         this.setShooting(false);
+        this.setFalling(false);
         maxSpeed = DEFAULT_MOVESPEED;
         currentState = AnimationStates.IDLE;
-        Handler = new AnimationHandler();
-        Handler.load("tempplayersheet.png");
+        //Handler = new AnimationHandler();
+        //Handler.load("tempplayersheet.png");
+
+        sr = new ShapeRenderer();
     }
 
 
     @Override
     public void update(float dt) {///movement worki
         //update animation and move image position to follow body
-        Handler.update(dt);
-        Handler.setPosition(this.x,this.y);
-
+        //Handler.update(dt);
+        //Handler.setPosition(this.x,this.y);
+        sr.begin(ShapeRenderer.ShapeType.Filled);
+        sr.rect(this.x,this.y,32,64);
+        sr.end();
         //handle body movements
         if(this.isRight == true && this.isLeft==false){
             setAnimationState(AnimationStates.WAlKING);
@@ -57,15 +66,25 @@ public class Player extends BaseModel {
             dx=0;
             setAnimationState(AnimationStates.IDLE);
         }
-        if(this.isJumping ==true){
-            dy = jumpHeight;
+        if(this.isJumping == true) {
+            dy += jumpAcceleration * dt;
+
+            if(dy > jumpFinalAcceleration){
+
+                dy = 0;
+                this.isJumping = false;
+                //this.isFalling = true;
+            }
+
         }
+
+
 
         //actual change of pos
         x += dx * dt;
         y += dy * dt;
-            System.out.println(x);
-            System.out.println(y);
+        System.out.println(x);
+        System.out.println(y);
     }
 
 
